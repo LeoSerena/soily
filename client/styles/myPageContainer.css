@@ -1,0 +1,22 @@
+.myPageContainer {
+    display: flex;
+    width: 80%;
+    padding: 5px;
+}
+
+.myPageContainer div{
+    flex: 18%;
+    border: 1px solid black;
+    padding-left: 3%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
+
+.myPageContainer table {
+    width: 100%;
+}
+
+.myPageContainer td {
+    text-align: center;
+}

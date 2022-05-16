@@ -1,0 +1,6 @@
+.recentDiscussions {
+    top: 100px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+}

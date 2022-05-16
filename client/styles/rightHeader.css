@@ -1,0 +1,16 @@
+.right_header_container {
+    position : absolute;
+    right: 0;
+    padding: 4px;
+    margin: 1%;
+    border: 1px solid red;
+    width: 18%;
+    justify-content: center;
+}
+
+.right_header_container * {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
