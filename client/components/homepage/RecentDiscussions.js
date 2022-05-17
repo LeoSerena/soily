@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import Router from "next/router"
 import axios from 'axios'
 
 export default function RecentDiscussions() {
@@ -25,7 +26,7 @@ export default function RecentDiscussions() {
         Recent Discussions
         </h2>
         <ul>
-            {discussions.map(discussion => <li key={discussion._id}>{discussion.title}</li>)}
+            {discussions.map(discussion => <li onClick={() => Router.replace(`/discussions/${discussion.title}`)} key={discussion._id}>{discussion.title}</li>)}
         </ul>
     </section>)
         

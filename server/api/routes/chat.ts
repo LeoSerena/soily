@@ -6,8 +6,6 @@ import Chat from '../database/models/Chat'
 import Message from '../database/models/Message'
 import { authMiddleware } from '../middlewares/auth'
 
-chat_route.get('/', authMiddleware, (req, res) => res.send('?'))
-
 chat_route.post('/new_chat', async (req, res) => {
     const {senderId, receiverId} = req.body
     const newChat = new Chat({ users : [senderId, receiverId] })

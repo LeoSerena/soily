@@ -15,4 +15,9 @@ export default function Homepage({ user }) {
     </>)
 }
 
-export async function getServerSideProps(context){return serverSideUser(context)}
+export async function getServerSideProps(context){
+    const user = await serverSideUser(context, context.query.name)
+    return { props : 
+        { user : user } 
+    }
+}

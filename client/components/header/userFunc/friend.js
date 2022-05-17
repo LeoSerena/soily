@@ -5,7 +5,7 @@ import ChatBox from '../../utils/chatBox'
 import { fetcher } from '../../../lib/request'
 
 
-export default function Friend({ user, friend_username, friend_id, type, chatId}){
+export default function Friend({ user, friend_username, friend_id, type, chat}){
 
     const [toggleChat, setToggleChat] = useState(false)
 
@@ -30,8 +30,17 @@ export default function Friend({ user, friend_username, friend_id, type, chatId}
         if(response === 'success'){Router.reload()}
     }
 
-    function toggleChatBox(e){
+    async function toggleChatBox(e){
         e.preventDefault()
+        if(!chat){
+            const [error, newChat] = await fetcher(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/chat/new_chat`,
+                'post',
+                {senderId : user._id, receiverId : friend_id}
+            )
+            if(error){console.log(error)}
+        }
+
         setToggleChat(!toggleChat)
     }
 
@@ -44,7 +53,7 @@ export default function Friend({ user, friend_username, friend_id, type, chatId}
             {type=='friend' && (<div>
                 <button onClick={handleDelete}>DEL</button>
                 </div>)}
-            {type=='friend' && toggleChat && <ChatBox user={user} chatId={chatId} friendId={friend_id}/>}
+            {type=='friend' && toggleChat && <ChatBox user={user} chatId={chat} friendId={friend_id}/>}
         </div>
     )
 

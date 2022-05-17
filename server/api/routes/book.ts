@@ -25,7 +25,8 @@ book_route.post('/deleteBook', authMiddleware, async (req, res) => {
 
 book_route.post('/modifiyBook', authMiddleware, async (req, res) => {
     try{
-        const res_ = await modifBook(req.body.userId, req.body.book)
+        const { userId, book} = req.body
+        const res_ = await modifBook(userId, book)
         res.status(200).send(res_)
     }catch(err){ 
         console.log(err)

@@ -15,8 +15,7 @@ export default function userPage({ user, pageContent }) {
 }
 
 export async function getServerSideProps(context){
-    let user = await serverSideUser(context)
-    user = user.props.user
+    const user = await serverSideUser(context)
     const pageContent = await serverSideUserPage(context, user._id)
     return {
         props : {

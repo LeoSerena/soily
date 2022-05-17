@@ -3,11 +3,13 @@ import { Schema, model, models } from "mongoose";
 const discussionSchema = new Schema({
     title : {
         type : String,
-        require : true
+        require : true,
+        unique : true
     },
     reference : {
         type : Schema.Types.ObjectId, 
-        ref : 'Discussion'
+        ref : 'Discussion',
+        required : true
     },
     tags : [{type : String, default : []}],
     owner : {

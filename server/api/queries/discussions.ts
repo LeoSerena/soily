@@ -1,3 +1,4 @@
+import Discussion from '../database/models/Discussion'
 import Discsussion from '../database/models/Discussion'
 
 import { discussionPayload } from '../documents'
@@ -24,4 +25,15 @@ export async function deleteDiscussion(userId : string, discussionId : string){
     if(discussion_.owner !== userId){throw new Error('ressource not accessible')}
     const res = await Discsussion.remove({ _id : discussionId })
     return res
+}
+
+export async function getDiscussionNames(){
+    const discussionNames = await Discsussion.find({}, 'title')
+    return discussionNames
+}
+
+export async function getDiscussion(name : string){
+    const discussion = await Discussion.findOne({ title : name })
+    if(discussion){return discussion}
+    else{throw new Error(`Discussion with name ${name} was not found`)}
 }

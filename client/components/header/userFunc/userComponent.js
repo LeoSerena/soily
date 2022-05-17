@@ -47,7 +47,7 @@ export default function UserComponent({ user, setUser }){
 
     return (
         <div className='userComponent'>
-            <p onClick={handleToggle}>{user.username}</p>
+            <p onClick={handleToggle}>{user.username}</p><button onClick={() => Router.replace('/myPage')}>my Page</button>
             <p>{user.email}</p>
             <button onClick={handleLogout}>log out</button>
             {toggleFriends && <FriendsComponent user={user} friends={friends}/>}
@@ -115,7 +115,7 @@ function FriendsComponent({ user, friends}){
                 {friends.friend_list.map(element => 
                 <Friend 
                     user={user} friend_username={element.username} friend_id={element._id} type='friend' key={element._id} 
-                    chatId={chatIds.find(c => c.users.includes(element._id))}
+                    chat={chatIds.find(c => c.users.includes(element._id))}
                 />)}
             </div>}
             {(friends.friend_request_pending.length > 0 || friends.friend_request_sent.length > 0) && <div>

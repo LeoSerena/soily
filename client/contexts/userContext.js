@@ -6,9 +6,23 @@ export const UserContext = createContext()
 export function UserContextProvider( {children} ){
     
     const [user, setUser] = useState('none')
-
-
     return(<UserContext.Provider value={{user, setUser}}> {children} </UserContext.Provider>)
+}
+
+export async function serverSideDiscussion(context, name, userId){
+    const [error, discussion] = await serverSideReq(
+        context.req, context.res,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/discussion`,
+        'post',
+        {
+            title : name,
+            userId : userId
+        }
+    )
+    if(error){ console.log(error) }
+    else{
+        return discussion
+    }
 }
 
 export async function serverSideUser(context){
@@ -21,9 +35,9 @@ export async function serverSideUser(context){
       )
       if(error){
           console.log(error)
-          return { props : { user : 'none' }}
+          return 'none'
       }else{
-          return { props : { user } }
+          return user
       }
 }
 

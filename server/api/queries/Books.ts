@@ -17,8 +17,8 @@ export async function delBook(userId : string, bookId : string){
 }
 
 export async function modifBook(userId : string, book: modifBookPayload){
-    const book_ = await Book.findById(book._id, 'userId')
-    if(book_.userId !== userId){throw new Error('ressource not accessible')}
+    const book_ = await Book.findById(book._id)
+    if(book_.userId != userId){throw new Error('ressource not accessible')}
     const res = await Book.updateOne(
         {'_id' : book._id},
         {'$set' : {
