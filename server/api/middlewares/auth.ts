@@ -8,7 +8,6 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction) 
 
   if (!token) {
     res.status(401)
-    console.log('Not Signed in, need to refresh access token')
     return next()
   }
   // this prevents that we access any ressource that is not the one of the token

@@ -1,8 +1,12 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
+import {Request} from 'express'
+
 import userModel from '../database/models/User'
 import { LoginRequest, RefreshToken, AccessToken } from 'api/documents'
+import { Cookies } from "../documents";
+
 
 export async function verifyUser(body : LoginRequest) {
     const { credentials, password } = body
@@ -30,3 +34,14 @@ export function verifyAccessToken(token: string) {
     } catch (e) {}
 }
   
+export function verifyAccess(
+    req : Request, userId : string, discussionOwner : string, coOwners : string[]
+){
+    const token = verifyAccessToken(req.cookies[Cookies.accessToken])
+    if(!token){ throw new Error('Unauthorized')}
+    if(token.userId == userId){
+        if(userId != discussionOwner && !coOwners.includes(userId)){
+            throw new Error('Unauthorized')
+        }
+    }
+}

@@ -8,6 +8,6 @@ export default function MyPageComponents({ pageContent, userId }) {
     return (<div className="myPageContainer">
         <MyLists/>
         <MyBooks userId={userId} owned_books={pageContent.books_owned}/>
-        <MyDiscussions/>
+        <MyDiscussions userId={userId} discussions_owned={pageContent.discussions_owned}/>
         </div>)
 }

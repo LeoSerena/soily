@@ -7,10 +7,7 @@ const messageSchema = new Schema({
         require : true
     },
     senderName : {type : String},
-    text : {type : String, default : ''},
-    image : {type : Buffer, default : null},
-    likes : {type : Number, default : 0},
-    diskiles : {type : Number, default : 0}
+    text : {type : String, default : ''}
 }, { timestamps : true})
 
 const Message =  models.Message || model('Message', messageSchema)

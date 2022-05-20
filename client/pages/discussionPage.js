@@ -1,11 +1,11 @@
 import HeaderComponent from "../components/header/headerComponent"
-import DiscussionComponent from "../components/discussionComponent/DiscussionComponent"
+import DiscussionsComponent from "../components/DiscussionsComponent"
 import { serverSideUser } from "../contexts/userContext"
 
 export default function DiscsussionPage({ user }){
     return(<>
         <HeaderComponent/>
-        <DiscussionComponent/>
+        <DiscussionsComponent/>
         </>
     )
 }

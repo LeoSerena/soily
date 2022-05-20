@@ -1,21 +1,33 @@
 import { useContext, useEffect } from "react"
 
 import HeaderComponent from "../../components/header/headerComponent"
+import LeftPanel from "../../components/discussion/LeftPanel"
+import DiscussionCenter from "../../components/discussion/DiscussionCenter"
+import RightPanel from "../../components/discussion/RightPanel"
 import { UserContext, serverSideUser, serverSideDiscussion } from '../../contexts/userContext'
 
-export default function Discussion({ user, discussion }){
+
+
+export default function Discussion({ user, discussion, recommandations }){
     const {_, setUser} = useContext(UserContext)
     useEffect(() => {setUser(user)},[UserContext])
     return <>
         <HeaderComponent/>
-        <h2>{discussion.title}</h2>
+        <div className="main_container">
+            <LeftPanel/>
+            <DiscussionCenter userId={user._id} discussion={discussion}/>
+            <RightPanel recommandations={recommandations}/>
+        </div>
     </>
 }
 
 export async function getServerSideProps(context){
     const { name } = context.query
     const user = await serverSideUser(context)
-    const discussion = await serverSideDiscussion(context, name, user._id)
+    let userId = (user !== 'none') ? user._id : 'none'
+    const discussion = await serverSideDiscussion(context, name, userId)
+    // recommandations are the personalized recoomandations proper to a user
+    //const recommandations = await serverSideRecommandations(context, user._id)
     return {
         props : {
             user : user,

@@ -7,30 +7,16 @@ const postSchema = new Schema({
         require : true
     },
     image : {
-        data: Buffer,
-        contentType: String
+        type: Buffer
     },
     text : {
         type : String
     },
-    pointer : {
-        discussion_pointer : {
-            discussion_id : Schema.Types.ObjectId,
-            ref : 'Discussion'
-        },
-        message_pointer : {
-            message_id : Schema.Types.ObjectId,
-            ref : 'Message'
-        },
-        owner : {
-            type : Schema.Types.ObjectId,
-            ref : 'User'
-        },
-        timestamp : {
-            type : Date,
-            default : Date.now
-        }
-    }
+    links : [{
+        type : Schema.Types.ObjectId,
+        ref : 'Discussion',
+        default : []
+    }]
 }, {timestamps : true})
 
 const Post = models.Post || model('Post', postSchema)

@@ -20,39 +20,47 @@ export async function serverSideDiscussion(context, name, userId){
         }
     )
     if(error){ console.log(error) }
-    else{
-        return discussion
-    }
+    else{ return discussion }
 }
 
 export async function serverSideUser(context){
-    const [error, user] = await serverSideReq(
-        context.req,
-        context.res,
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/getUser`,
-        'get',
-        null
-      )
-      if(error){
-          console.log(error)
-          return 'none'
-      }else{
-          return user
-      }
+    if(context.req.headers.cookie){
+        const [error, user] = await serverSideReq(
+            context.req,
+            context.res,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/getUser`,
+            'get',
+            null
+          )
+          if(error){
+              console.log(error)
+              return 'none'
+          }else{
+              return user
+          }
+    }else{
+        // if no cookies -> can't connect
+        return 'none'
+    }
 }
 
+
 export async function serverSideUserPage(context, userId){
-    const [error, userPage] = await serverSideReq(
-        context.req,
-        context.res,
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/userPage`,
-        'post',
-        {userId : userId}
-      )
-    if(error){
-        console.log(error)
-        return null
+    if(context.req.headers.cookie){
+        const [error, userPage] = await serverSideReq(
+            context.req,
+            context.res,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/userPage`,
+            'post',
+            {userId : userId}
+        )
+        if(error){
+            console.log(error)
+            return null
+        }else{
+            return userPage
+        }
     }else{
-        return userPage
+        return null
     }
 }

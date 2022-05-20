@@ -6,9 +6,15 @@ const discussionSchema = new Schema({
         require : true,
         unique : true
     },
-    reference : {
+    description : {
+        type : String,
+        require : true
+    },
+    reference : { 
+        // maybe put more information in there: 
+        // a subdocument containing info on the discussion the post comes from (name id desc)
         type : Schema.Types.ObjectId, 
-        ref : 'Discussion',
+        ref : 'Post',
         required : true
     },
     tags : [{type : String, default : []}],
@@ -19,13 +25,14 @@ const discussionSchema = new Schema({
     },
     co_owners : [{
         type : Schema.Types.ObjectId, 
-        ref : 'User'
+        ref : 'User',
+        default : []
     }],
     private : {
         type : Schema.Types.Boolean,
         default : true
     },
-    messages : [{type : Schema.Types.ObjectId, ref : 'Post', default : []}],
+    posts : [{type : Schema.Types.ObjectId, ref : 'Post', default : []}],
     language : {
         type : 'String',
         default : 'english'

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import HomeLink from './HomeLink';
+import ToolBar from './Toolbar';
 import RightHeader from './rightHeader'
 
 export default function HeaderComponent(){
@@ -9,7 +9,7 @@ export default function HeaderComponent(){
             <Head>
                 <title>Soil</title>
             </Head>
-            <HomeLink/>
+            <ToolBar/>
             <RightHeader/>
         </div>
     )

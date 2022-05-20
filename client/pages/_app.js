@@ -9,6 +9,7 @@ import '../styles/registerLogin.css'
 import '../styles/userComponent.css'
 import '../styles/chatbox.css'
 import '../styles/myPageContainer.css'
+import '../styles/discussion.css'
 
 
 export default function App({ Component, pageProps }) {

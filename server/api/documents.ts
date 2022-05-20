@@ -59,7 +59,16 @@ export type modifBookPayload = {
 
 export type discussionPayload = {
     title : string
-    reference : string
+    owner : string
+    description : string
+    reference? : string
     tags? : string[]
+    language : string
     private : boolean
+}
+
+export type postPayload = {
+    owner : string
+    text? : string
+    image? : Buffer
 }
