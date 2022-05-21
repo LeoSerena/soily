@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  api-service:
+    image: node:16-alpine
+    container_name: api_server
+    working_dir: /
+    volumes:
+      - ./server/api:/api
+      - ./server/package.json:/package.json
+      - ./server/tsconfig.json:/tsconfig.json
+    ports:
+      - '3001:3001'
+    command : sh -c "yarn install && yarn start-api-dev"
+    env_file : server/.env
+
+  client-service:
+    image: node:16-alpine
+    container_name: client_server
+    working_dir : /
+    volumes:
+      - ./client/components:/components
+      - ./client/contexts:/contexts
+      - ./client/lib:/lib
+      - ./client/pages:/pages
+      - ./client/styles:/styles
+      - ./client/package.json:/package.json
+    ports:
+      - '3000:3000'
+    command : sh -c "yarn install && npm run dev"
+    env_file: client/.env.local
