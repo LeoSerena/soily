@@ -4,6 +4,8 @@
   "main": "index.js",
   "author": "Leo Serena <leoserena@hotmail.ch>",
   "scripts": {
+    "start-api": "yarn ts-node api/index.ts",
+    "start-realtime" : "yarn ts-node realtime/index.ts",
     "start-api-dev": "yarn ts-node-dev api/index.ts",
     "start-realtime-dev" : "yarn ts-node-dev realtime/index.ts"
   },

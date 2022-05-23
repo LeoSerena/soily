@@ -9,7 +9,7 @@ import { UserContext, serverSideUser, serverSideDiscussion } from '../../context
 
 
 export default function Discussion({ user, discussion, recommandations }){
-    const {_, setUser} = useContext(UserContext)
+    const {setUser} = useContext(UserContext)
     useEffect(() => {setUser(user)},[UserContext])
     return <>
         <HeaderComponent/>

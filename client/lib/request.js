@@ -39,8 +39,8 @@ export const fetcher = async (url, method, payload) => {
       case 'post':
         try{
             const request = () => axios.post( url, payload, {withCredentials:true} )
-            const data = await request()
-            return [null, data.data]
+            const {data} = await handleRequest(request)
+            return [null, data]
         } catch(error) {
             return [error, null]
         }

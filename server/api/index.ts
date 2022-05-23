@@ -17,10 +17,20 @@ import book_route from './routes/book'
 
 const app = express()
 
-const client_url = process.env.CLIENT_URL
+const allowed_urls = ['http://localhost:3000', 'http://localhost', '127.18.0.2', '127.18.0.2:3000']
+const corsOptions = {
+    origin : (origin : any, callback: any) => {
+        if(allowed_urls.includes(origin) || !origin){callback(null, true)}
+        else{callback(new Error(`origin <${origin}> is not allowed`))}
+    },
+    credentials : true
+}
+app.use(cors(corsOptions))
+
 // const io_url = process.env.IO_URL
+// const client_url = process.env.NODE_ENV=='production' ? '172.18.0.2' : process.env.CLIENT_URL
+// app.use(cors({ origin: client_url, credentials : true }));
 app.use(cookieParser())
-app.use(cors({ origin: client_url, credentials : true }));
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => { res.send('api is healthy') })

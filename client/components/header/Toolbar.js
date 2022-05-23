@@ -13,8 +13,8 @@ export default function ToolBar() {
         <Link href='/'>
             <a>Soil</a>
         </Link>
-        {!toggle && <p onClick={() => setToggle(true)}>New Discussion</p>}
-        {user != 'none'  && toggle  && <NewDiscussionForm userId={user._id}/>}
+        {user != 'none' && !toggle && <p onClick={() => setToggle(true)}>New Discussion</p>}
+        {user != 'none' && toggle  && <NewDiscussionForm userId={user._id}/>}
     </div>
     )
 }

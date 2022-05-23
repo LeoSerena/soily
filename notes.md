@@ -19,3 +19,20 @@
 - **pseudo-element**: *.class::before* ->  this will insert things before the element. Can also be used to change specific parts of elements, such as *li::marke{ color: red }* or *::selection* to style contenet highlighted by user.
 
 - **div p**: will select pars that are in divs.
+
+## Docker
+
+### create image
+
+```
+docker build -t <name> <path>
+```
+
+### create container
+
+### network
+
+- create network:
+``` 
+docker network create <name> --subnet=<range, i.e. 127.0.0.0/16>
+```

@@ -42,7 +42,6 @@ const handleRequest = async (req, res, request) => {
   }
 
 export const serverSideReq = async (req, res, url, method, payload) => {
-    
     switch(method){
         case 'get':
             try{
@@ -52,7 +51,6 @@ export const serverSideReq = async (req, res, url, method, payload) => {
             } catch (error){
                 return [error, null]
             }
-            break
         case 'post':
           let cookie = req.headers.cookie ? req.headers.cookie : null
           try{
@@ -62,7 +60,6 @@ export const serverSideReq = async (req, res, url, method, payload) => {
           } catch(err) {
               return [err, null]
           }
-          break
         default:
             return ['wrong method', null]
     }

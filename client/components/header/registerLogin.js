@@ -51,7 +51,7 @@ function LoginForm({ setUser, setToggle }) {
             setUser(result.data.user)
             Router.push('/myPage')
         }else{
-            alert(result.data.status)
+            alert(result.data)
         }
     }
 

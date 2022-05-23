@@ -11,7 +11,8 @@ export default function RecentDiscussions() {
             async function getRecentDisccussions(){
                 let discussions = await axios({
                     method : 'get',
-                    url :`${process.env.NEXT_PUBLIC_SERVER_URL}/recentDiscussions`
+                    url :`${process.env.NEXT_PUBLIC_SERVER_URL}/recentDiscussions`,
+                    withCredentials : true
                 })
                 .then(d => setDiscussions(d.data))
                 .catch(error => console.log(error))
