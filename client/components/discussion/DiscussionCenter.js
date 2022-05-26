@@ -2,6 +2,7 @@ import { useState } from "react"
 
 import { fetcher } from "../../lib/request"
 import NewDiscussionForm from '../discussion/NewDiscussionForm'
+import DiscussionLink from "../utils/DiscussionLink"
 
 export default function DiscussionCenter({ discussion, userId }){
 
@@ -12,7 +13,7 @@ export default function DiscussionCenter({ discussion, userId }){
     </div>
 }
 
-function PostsComponent({ posts, userId, discussionId }){
+export function PostsComponent({ posts, userId, discussionId, left }){
 
     const [currentPost, setCurrentPost] = useState('')
     const [currentPosts, setCurrentPosts] = useState(posts)
@@ -40,32 +41,42 @@ function PostsComponent({ posts, userId, discussionId }){
     }
 
     return <div>
-        {currentPosts.map(post =><Post userId={userId} key={post._id} post={post}/>)}
+        {currentPosts.map(post =><Post left={left} userId={userId} key={post._id} post={post}/>)}
         {userId && <form>
             <textarea onChange={handleChange} value={currentPost} placeholder='new message...'/>
-            <button onClick={handleSend} type='submit'>send</button>
+            <button onClick={handleSend} type='submit'>Post</button>
         </form>}
     </div>
 }
 
 
-function Post({ post, userId }){
+function Post({ post, userId, left }){
 
-    const [toggle, setToggle] = useState(false)
+    const [toggleForm, setToggleForm] = useState(false)
+    const [toggleLinks, setToggleLinks] = useState(false)
 
-    function addLink(e){
+    const num_links = post.links.length
+
+    function showLinks(e){
         e.preventDefault()
-        // need to find a nice way to create links
+        setToggleLinks(!toggleLinks)
     }
     
-    return <div>
-        <p>{post.owner.username}</p>
-        {/* {userId && <button onClick={addLink}>add link</button>} */}
-        {userId && toggle && <NewDiscussionForm postId={post._id} userId={userId}/>}
-        {userId && <button onClick={() => setToggle(!toggle)}>create new</button>}        
-        <section>{post.text}</section>
-        {post.links.map(link => <p key={link._id}>{link.title}</p>)}
+    return <div className="post" key={post._id}>
+        <div className="post_content">
+            <p>{post.owner.username}</p>
+            {post.text}
+        </div>
+        {!left && <section className="post_links">
+            {userId && toggleForm && <NewDiscussionForm postId={post._id} userId={userId}/>}
+            {userId && <button onClick={() => setToggleForm(!toggleForm)}>new branch</button>}
+            {userId && num_links > 0 && <button onClick={showLinks} className='showLinksButton'>Links ({num_links})</button>}
+            {toggleLinks &&   <DiscussionLinks links={post.links}/>}
+        </section>}
         </div>
 
 }
 
+function DiscussionLinks({ links }){
+    return links.map(link => <DiscussionLink key={link._id} _id={link._id} title={link.title} description={link.description}/>)
+}

@@ -112,6 +112,10 @@ function FriendsComponent({ user, friends}){
         <div>
             {friends.friend_list.length > 0 && <div className='friendList'>
                 <h3>Friends</h3>
+                <form onSubmit={handleFriendRequestSubmit}>
+                    <Input withLabel={true} name='friend' inputNameDisplay='add friend' value={friendValue} handleChange={handleChange}/>
+                    <input type="submit" value="add" />
+                </form>
                 {friends.friend_list.map(element => 
                 <Friend 
                     user={user} friend_username={element.username} friend_id={element._id} type='friend' key={element._id} 
@@ -134,9 +138,5 @@ function FriendsComponent({ user, friends}){
                     <Friend user={user} friend_username={element.username} friend_id={element._id} type='request' key={element._id}/>)}
                 </div>}
             </div>}
-            <form onSubmit={handleFriendRequestSubmit}>
-                <Input withLabel={true} name='friend' inputNameDisplay='add friend' value={friendValue} handleChange={handleChange}/>
-                <input type="submit" value="add" />
-            </form>
         </div>)
 }

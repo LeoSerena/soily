@@ -22,3 +22,29 @@
 .right_panel{
     flex : 12%;
 }
+
+.post{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.post_content {
+    flex: 90%;
+    margin: 0;
+    padding: 0;
+}
+
+.post_links{
+    border: 1px solid black;
+    flex: 10%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.post * {
+    margin: 0;
+    padding: 0;
+}
+

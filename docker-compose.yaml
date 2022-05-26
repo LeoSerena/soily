@@ -6,9 +6,9 @@ services:
     container_name: api_server
     working_dir: /app
     volumes:
-      - ./server/api:/api
-      - ./server/package.json:/package.json
-      - ./server/tsconfig.json:/tsconfig.json
+      - ./api/api:/api
+      - ./api/package.json:/package.json
+      - ./api/tsconfig.json:/tsconfig.json
     ports:
       - '3001:3001'
     command : sh -c "yarn install && yarn start-api-dev"

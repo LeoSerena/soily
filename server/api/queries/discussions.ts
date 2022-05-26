@@ -9,7 +9,7 @@ export async function getRecentDiscussions(){
     let discussions = await Discussion.find({
         private : false 
     }, 
-    'title tags',
+    'title tags description',
     {
         sort : {date_added: -1}
     }).limit(30)

@@ -5,7 +5,7 @@ const userSchema = new Schema({
         type: String,
         require: true,
         unique : true,
-        validate : (u: string | string[]) => (u.length < 20 && !u.includes('@'))
+        validate : (u: string | string[]) => (u.length < 32 && !u.includes('@'))
     },
     email: {
         type: String,

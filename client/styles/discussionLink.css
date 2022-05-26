@@ -1,0 +1,9 @@
+.discussionLink:hover{
+    background-color: red;
+    cursor: pointer;
+}
+
+.discussionLink *{
+    margin: 0;
+    padding: 0;
+}

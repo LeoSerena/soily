@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
 
+import { validate_login, validate_register } from '../../lib/validation'
 import Input from '../utils/input'
 
 export default function RegisterLogin ( {setUser} ){
@@ -38,20 +39,26 @@ function LoginForm({ setUser, setToggle }) {
 
     async function login(event) {
         event.preventDefault()
-        const result = await axios({
-            method : 'post',
-            url : `${process.env.NEXT_PUBLIC_SERVER_URL}/login`,
-            data : {
-                credentials : credentials,
-                password : password
-            },
-            withCredentials: true
-        })
-        if(result.data.status === 'success'){
-            setUser(result.data.user)
-            Router.push('/myPage')
+        const data = {
+            credentials : credentials,
+            password : password
+        }
+        const valid = validate_login(data)
+        if(valid){
+            alert(valid)
         }else{
-            alert(result.data)
+            const result = await axios({
+                method : 'post',
+                url : `${process.env.NEXT_PUBLIC_SERVER_URL}/login`,
+                data : data,
+                withCredentials: true
+            })
+            if(result.data.status === 'success'){
+                setUser(result.data.user)
+                Router.push('/myPage')
+            }else{
+                alert(result.data)
+            }
         }
     }
 
@@ -101,19 +108,25 @@ function RegisterForm({setToggle}) {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        if(!password === passwordConfirm){
-            alert('The two passwords are not identical')
-        }else{
-            let result = await axios({
-                method : 'post',
-                url : `${process.env.NEXT_PUBLIC_SERVER_URL}/register`,
-                data : {
-                    username : username,
-                    password : password,
-                    email : email
-                }
-            })
-            Router.reload()
+        const data = {
+            username : username,
+            password : password,
+            email : email
+        }
+        const valid = validate_register(data)
+        if(valid){alert(valid)}
+        else{
+            if(!password === passwordConfirm){
+                alert('The two passwords are not identical')
+            }else{
+                let result = await axios({
+                    method : 'post',
+                    url : `${process.env.NEXT_PUBLIC_SERVER_URL}/register`,
+                    data : data
+                })
+                // handle register verification
+                Router.reload()
+            }
         }
     }
 

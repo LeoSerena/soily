@@ -2,12 +2,13 @@ import { useId, useState } from "react"
 import Router from "next/router"
 
 import { fetcher } from "../../lib/request"
+import { validate_discussion } from "../../lib/validation"
 
 export default function NewDiscussionForm({ postId, userId }){
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [tags, setTags] = useState()
+    const [tags, setTags] = useState([])
     const [private_, setPrivate] = useState(false)
     const [language, setLanguage] = useState('english')
 
@@ -37,25 +38,28 @@ export default function NewDiscussionForm({ postId, userId }){
 
     async function handleNewDiscussion(e){
         e.preventDefault()
-        const [error, response] = await fetcher(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/newDiscussion`,
-            'post',
-            {
-                userId : userId,
-                data : {
-                    title : title,
-                    owner : userId,
-                    description : description,
-                    reference : postId? postId : null,
-                    tags : tags,
-                    language : language,
-                    private : private_
-                }
-            }
-        )
-        if(error){console.log(error)}
+        const data = {
+            title : title,
+            owner : userId,
+            description : description,
+            reference : postId? postId : null,
+            tags : tags,
+            language : language,
+            private : private_
+        }
+        const valid = validate_discussion(data)
+        if(valid){alert(valid)}
         else{
-            Router.replace(`/discussions/${title}`)
+            const [error, response] = await fetcher(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/newDiscussion`,
+                'post',
+                {
+                    userId : userId,
+                    data : data
+                }
+            )
+            if(error){console.log(error)}
+            else{Router.replace(`/discussions/${title}`)}
         }
     }
 

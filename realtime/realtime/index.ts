@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { Server, Socket} from 'socket.io'
 
-import { MessagePayload } from '../api/documents'
+import { MessagePayload } from './documents'
 
 const app = express()
 app.use(cors())

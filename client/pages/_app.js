@@ -10,7 +10,8 @@ import '../styles/userComponent.css'
 import '../styles/chatbox.css'
 import '../styles/myPageContainer.css'
 import '../styles/discussion.css'
-
+import '../styles/leftPanel.css'
+import '../styles/discussionLink.css'
 
 export default function App({ Component, pageProps }) {
 

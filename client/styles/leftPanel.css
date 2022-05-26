@@ -1,0 +1,16 @@
+.leftPanel {
+    width: 20%;
+    height: 200px;
+}
+
+.sessionHistory {
+    max-height: 140px;
+    overflow-y: scroll;
+}
+
+.sessionHistory p{
+    margin: 0;
+    padding-left: 8px;
+    height: 15px;
+    display: flex;
+}

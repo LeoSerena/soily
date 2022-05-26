@@ -84,7 +84,7 @@ export default function MyBooks({ owned_books, userId }){
                     <label>author</label>
                     <input value={author} onChange={(v) => setAuthor(v.target.value)}/>
                     
-                    <label>title</label>
+                    <label>year</label>
                     <input value={release} onChange={(v) => setRelease(v.target.value)}/>
                     
                     <button type='submit' onClick={handleSubmit}>add</button>
