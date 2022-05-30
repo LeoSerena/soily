@@ -38,7 +38,7 @@ export const fetcher = async (url, method, payload) => {
           }
       case 'post':
         try{
-            const request = () => axios.post( url, payload, {withCredentials:true} )
+            const request = () => axios.post( url, payload, { withCredentials: true } )
             const {data} = await handleRequest(request)
             return [null, data]
         } catch(error) {
@@ -47,4 +47,14 @@ export const fetcher = async (url, method, payload) => {
       default:
           return ['wrong method', null]
   }
+}
+
+export const postFile = async (url, formData) => {
+    try{
+      const request = () => axios.post(url, formData,
+        { headers : { 'Content-Type' : 'multipart/form-data' }}
+      )
+      const {data} = await handleRequest(request)
+      return [null, data]   
+    } catch (error){ return [error, null] }
 }

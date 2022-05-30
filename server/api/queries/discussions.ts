@@ -2,8 +2,8 @@ import Post from '../database/models/Post'
 import Discussion from '../database/models/Discussion'
 import User from '../database/models/User'
 import Link from '../database/models/Link'
+import File from '../database/models/File'
 import { discussionPayload, postPayload } from '../documents'
-
 
 export async function getRecentDiscussions(){
     let discussions = await Discussion.find({
@@ -69,6 +69,28 @@ export async function postPost(discussionId : string, post : postPayload){
     await Discussion.updateOne(
         {_id : discussionId}, 
         { $push : { posts : newPost._id } }
+    )
+    return newPost
+}
+
+export async function postFile( discussionId : string, userId : string, text : string, file : any ){
+    let newFile = await File.create({
+        owner : userId,
+        type : file.mimetype,
+        filename : file.original,
+        path : file.path,
+        size : file.size
+    })
+    let newPost = await Post.create({
+        owner : userId,
+        hasFile : true,
+        file : newFile._id,
+        text : text    
+    })
+    newPost = await newPost.populate({ path : 'owner', select : 'username'})
+    await Discussion.updateOne(
+        { _id : discussionId},
+        { $push : { posts : newPost._id}}
     )
     return newPost
 }

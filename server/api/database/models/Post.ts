@@ -6,12 +6,9 @@ const postSchema = new Schema({
         ref : 'User',
         require : true
     },
-    image : {
-        type: Buffer
-    },
-    text : {
-        type : String
-    },
+    hasFile : {type : Boolean, default : false},
+    file : { type: Schema.Types.ObjectId, ref : 'File'},
+    text : { type : String, default : ''},
     links : [{
         type : Schema.Types.ObjectId,
         ref : 'Discussion',

@@ -1,12 +1,15 @@
 import express from 'express'
 const user_route = express.Router()
 
+
 import { Cookies } from "../documents";
 import { getUserVersionById, createUser, getUserPage } from '../queries/users'
 import { setTokens, buildTokens, refreshTokens, clearTokens } from "../authentication/tokens";
 import { authMiddleware } from '../middlewares/auth'
 import { verifyRefreshToken, verifyUser, verifyAccessToken } from "../authentication/verify";
 import { getFriendsFromId, getUserById } from "../queries/users";
+import { upload_profile_picture, has_profile_picture } from '../middlewares/files'
+
 
 user_route.post('/register', async (req, res) => {
     const user = await createUser(req.body)
@@ -22,7 +25,6 @@ user_route.post('/login', async (req, res) => {
             status : 'success',
             user : user
         })
-        //res.redirect(`${process.env.CLIENT_URL}/myPage`)
     }
 })
 
@@ -74,9 +76,15 @@ user_route.post('/userPage', authMiddleware, async (req, res) => {
     try{
         const pageInfo = await getUserPage(req.body.userId)
         res.status(200).send(pageInfo)
-    }catch(error){
-        res.send(error)
-    }
+    }catch(error){ res.send(error) }
+})
+
+user_route.post('/profilePicture', [authMiddleware, upload_profile_picture.single('image')], async (req : any, res : any) => {
+    try{
+        if(has_profile_picture(req.body.userId)){
+            res.status(201).send('success')
+        }else{ res.status(501).send('failure') }
+    }catch(err){ console.log(err) }
 })
 
 export default user_route

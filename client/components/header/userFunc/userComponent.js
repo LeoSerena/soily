@@ -10,6 +10,7 @@ import { socketContext } from '../../../contexts/socketContext.js'
 export default function UserComponent({ user, setUser }){
 
     const socket = useContext(socketContext)
+    const [toggleOptions, setToggleOptions] = useState(false)
     const [toggleFriends, setToggleFriends] = useState(false)
     const [friends, setFriends] = useState('')
 
@@ -26,7 +27,7 @@ export default function UserComponent({ user, setUser }){
         Router.replace('/')
     }
 
-    async function handleToggle(){
+    async function handleToggleFriends(){
         if(toggleFriends){
             setToggleFriends(false)
         }else{
@@ -47,11 +48,13 @@ export default function UserComponent({ user, setUser }){
 
     return (
         <div className='userComponent'>
-            <p onClick={handleToggle}>{user.username}</p><button onClick={() => Router.replace('/myPage')}>my Page</button>
-            <p>{user.email}</p>
-            <button onClick={handleLogout}>log out</button>
+            <button onClick={() => setToggleOptions(!toggleOptions)}>Options</button>
+            {toggleOptions && <div>
+                <button onClick={handleLogout}>Log out</button>
+                <button onClick={handleToggleFriends}>Friends</button>
+            </div>}
+            <p className='username' onClick={() => Router.replace('/myPage')}>{user.username}</p>
             {toggleFriends && <FriendsComponent user={user} friends={friends}/>}
-            
         </div>
     )
 }
@@ -109,7 +112,7 @@ function FriendsComponent({ user, friends}){
     }
 
     return (
-        <div>
+        <div className='friendsComponent'>
             {friends.friend_list.length > 0 && <div className='friendList'>
                 <h3>Friends</h3>
                 <form onSubmit={handleFriendRequestSubmit}>

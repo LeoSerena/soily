@@ -14,3 +14,26 @@
     height: 15px;
     display: flex;
 }
+
+.session-tabs {
+    border-bottom: 1px solid #ccc;
+    padding-left: 0;
+}
+
+.session-tabs :hover {
+    background-color: rgb(196, 190, 191);
+}
+
+.session-tabs li{
+    display: inline-block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+}
+
+.current-session-tab{
+    background-color: rgb(168, 135, 142);
+    border: solid #ccc;
+    border-width: 1px 1px 0 1px;
+}

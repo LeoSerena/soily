@@ -10,10 +10,10 @@ export default function Homepage({ user }) {
     const {setUser} = useContext(UserContext)
     useEffect(() => {setUser(user)},[UserContext])
     
-    return (<>
+    return (<div className='main'>
         <HeaderComponent/>
         <RecentDiscussions/>
-    </>)
+    </div>)
 }
 
 export async function getServerSideProps(context){

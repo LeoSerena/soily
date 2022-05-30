@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt'
 
-import userModel from '../database/models/User'
 import User from '../database/models/User'
 
 interface registerBody {
@@ -21,7 +20,7 @@ export async function createUser(userInfo : registerBody){
         const hashedPassword = await hashPassword(password)
         userInfo.password = hashedPassword
         userInfo.tokenVersion = 0
-        const user = await userModel.create(userInfo)
+        const user = await User.create(userInfo)
         return user
     }catch (error){
         return error
@@ -30,11 +29,11 @@ export async function createUser(userInfo : registerBody){
 }
 
 export async function getUserVersionById(userId : string) {
-    return userModel.findOne({ userId })
+    return User.findOne({ userId })
 }
 
 export async function getFriendsFromId(userId :string){
-    return userModel.findById(userId,
+    return User.findById(userId,
         '_id friend_list friend_request_pending friend_request_sent'
     ).populate({
         path : 'friend_list',
@@ -49,25 +48,25 @@ export async function getFriendsFromId(userId :string){
 }
 
 export async function getUserById(userId : string){
-    return userModel.findById(userId)
+    return User.findById(userId)
 }
 
 export async function friendRequest(userId : string, friend_credential : string){
-    userModel.findOne(
+    User.findOne(
         { username : friend_credential},
         '_id username'
     ).exec((err, friend) => {
         if(err||!friend){ return 'The given username or email was not found'}
         else if (friend.username!=friend_credential){return 'The given username or email was not found'}
         // Add friend request pending
-        userModel.updateOne(
+        User.updateOne(
             {_id : userId},
             { $push : {friend_request_sent : friend._id}}
         ).exec((err) => {
             if(err){return err}
             else{
                 // send friend request
-                userModel.updateOne(
+                User.updateOne(
                     {_id : friend._id},
                     {$push : {friend_request_pending : userId}}
                 ).exec((err) => {
@@ -81,7 +80,7 @@ export async function friendRequest(userId : string, friend_credential : string)
 
 export async function answerFriendRequest(userId : string, friendId : string, answer : boolean){
     if(answer){
-        userModel.updateOne(
+        User.updateOne(
             {_id : userId},
             {
                 $push : {friend_list : friendId},
@@ -90,7 +89,7 @@ export async function answerFriendRequest(userId : string, friendId : string, an
         ).exec((err) => {
             if(err){return err}
             else{
-                userModel.updateOne(
+                User.updateOne(
                     {_id : friendId},
                     {
                         $push : {friend_list : userId},
@@ -103,13 +102,13 @@ export async function answerFriendRequest(userId : string, friendId : string, an
             }
         })
     }else{
-        userModel.updateOne(
+        User.updateOne(
             {_id : userId},
             { $pull : {friend_request_pending : friendId} }
         ).exec((err) => {
             if(err){return err}
             else{
-                userModel.updateOne(
+                User.updateOne(
                     {_id : friendId},
                     { $pull : {friend_request_sent : userId} }
                 ).exec((err) => {
@@ -124,13 +123,13 @@ export async function answerFriendRequest(userId : string, friendId : string, an
 }
 
 export async function deleteFriend(userId : string, friendId : string){
-    userModel.updateOne(
+    User.updateOne(
         {_id : userId},
         { $pull : {friend_list : friendId} }
     ).exec((err) => {
         if(err){return err}
         else{
-            userModel.updateOne(
+            User.updateOne(
                 {_id : friendId},
                 { $pull : {friend_list : userId} }
             ).exec((err) => {

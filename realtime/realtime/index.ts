@@ -25,7 +25,7 @@ let onlineUsers = new Map()
 
 // set users offline when they inactive for 15minutes
 setInterval(() => {
-    console.log(onlineUsers)
+    console.log(`number of users : ${onlineUsers.size}`)
     onlineUsers.forEach((user, userId) => {
         if(Date.now() - user.timestamp > 1000 * 60 * 15){onlineUsers.delete(userId)}
     })

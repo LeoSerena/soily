@@ -1,17 +1,130 @@
 .toolBar {
+    padding: 12px 0px 8px 20px;
     height: 50px;
-    background-color: rgb(186, 185, 187);
-    border: 1px solid black;
+    margin-left: -0.6%;
+    margin-top: -0.6%;
+    width: 100%;
+    background-color: rgb(31, 30, 31);
     display: flex;
+    text-shadow: 2px 2px rgb(177, 177, 177);
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
 
-.toolBar a {
-    flex: 40%;
+.homeLink {
+    flex: 80%;
     font-size: 50px;
-    color: black;
+    color: rgb(182, 183, 184);
     text-decoration: none;
 }
 
-.toolBar form{
+.newDiscussion {
+    flex : 90%
+}
+
+.right_header_container {
     flex: 10%;
+    width: 20%;
+}
+
+.registerLogin{
+    height: 80%;
+    padding-bottom: 4%;
+    padding-right: 4%;
+}
+
+#loginButton, #registerButton{
+    border: 0;
+    background-color: rgb(109, 109, 109);
+    width: 46%;
+    height: 100%;
+    margin: 2%;
+    border-radius: 2px;
+    font-size: 20px;
+    text-decoration: none;
+    color : rgb(219, 219, 219);
+    outline: none;
+    box-shadow: 0 4px rgb(153, 152, 152);
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+#loginButton:hover, #registerButton:hover{
+    background-color: rgb(138, 138, 138);
+    cursor: pointer;
+}
+
+#loginButton:active, #registerButton:active{
+    background-color: rgb(124, 124, 124);
+    box-shadow: 0 1px rgb(158, 158, 158);
+    transform: translateY(3px);
+}
+
+.loginForm, .registerForm{
+    display: flex;
+    flex-direction: column;
+    z-index: 2202;
+    position: fixed;
+    top: 20%;
+    left : 40%;
+    width: 20%;
+    padding : 1% 2% 1% 2%;
+    opacity : 0.97;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: rgb(10, 10, 10);
+}
+
+.loginForm input[type=text]{
+    width : 100%;
+    margin: 1%;
+}
+
+.registerForm input[type=text]{
+    width : 100%;
+    margin: 1%;
+}
+
+.loginForm button, input[type=submit]{
+    margin-left: 70%;
+    margin-top: 2%;
+    width: 30%;
+    height: 25px;
+}
+
+.registerForm button, input[type=submit]{
+    margin-left: 70%;
+    margin-top: 2%;
+    width: 30%;
+    height: 25px;
+}
+
+.right_header_container{
+    margin-right: 1%;
+    flex: 30%;
+}
+
+.userComponent{
+    display: flex ;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.username{
+    padding: 2%;
+    font-size: 30px;
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    right: 0;
+}
+
+.friendsComponent {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 8%;
+    width: 100%;
 }

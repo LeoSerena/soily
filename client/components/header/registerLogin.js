@@ -15,8 +15,8 @@ export default function RegisterLogin ( {setUser} ){
         return <LoginForm setUser={setUser} setToggle={setToggle}/>
     } else{
         return (<div className = 'registerLogin'>
-            <button onClick={() => setToggle('login')}>Login</button>
-            <button onClick={() => setToggle('register')}>Register</button>
+            <button id='loginButton' onClick={() => setToggle('login')}>Login</button>
+            <button id='registerButton' onClick={() => setToggle('register')}>Register</button>
         </div>)
     }
                 
@@ -63,7 +63,7 @@ function LoginForm({ setUser, setToggle }) {
     }
 
     return (
-        <form onSubmit={login}>
+        <form className='loginForm' onSubmit={login}>
             <Input 
                 withLabel={true} 
                 key={'credentials'} 
@@ -131,7 +131,7 @@ function RegisterForm({setToggle}) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className='registerForm' onSubmit={handleSubmit}>
             <Input withLabel={true} name={'username'} inputNameDisplay={'username'} value={username} handleChange={handleChange}/>
             <Input withLabel={true} name={'password'} inputNameDisplay={'password'} value = {password} handleChange={handleChange}/>
             <Input withLabel={true} name={'passwordConfirm'} inputNameDisplay={'passwordConfirm'} value = {passwordConfirm} handleChange={handleChange}/>

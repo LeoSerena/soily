@@ -1,9 +1,12 @@
 import express from 'express'
+
 const discussions_route = express.Router()
+import { upload_file } from '../middlewares/files'
+
 
 import { authMiddleware } from '../middlewares/auth';
 import { addDiscussion, getRecentDiscussions, getDiscussionNames, getDiscussion, 
-    postPost } from "../queries/discussions";
+    postPost, postFile } from "../queries/discussions";
 import { verifyAccess } from '../authentication/verify'
 
 discussions_route.get('/recentDiscussions', async (req, res) => {
@@ -48,6 +51,21 @@ discussions_route.post('/post', authMiddleware, async (req, res) => {
     const {discussionId, post} = req.body
     try{
         const newPost = await postPost(discussionId, post)
+        res.status(200).send(newPost)
+    }catch(error){
+        res.status(500).send(error)
+    }
+})
+
+discussions_route.post('/postFile', [authMiddleware, upload_file.single('file')], async (req: any, res: any) => {
+    const {discussionId, text, userId} = req.body
+    try{
+        const newPost = await postFile(
+            discussionId,
+            userId,
+            text,
+            req.file
+        )
         res.status(200).send(newPost)
     }catch(error){
         res.status(500).send(error)

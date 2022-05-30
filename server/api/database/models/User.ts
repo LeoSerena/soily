@@ -21,10 +21,7 @@ const userSchema = new Schema({
         type : Number,
         required : true
     },
-    image : {
-        data : Buffer,
-        contentType : String
-    },
+    image : { type: Schema.Types.ObjectId, ref : 'File'},
     friend_list : [{type : Schema.Types.ObjectId, ref : 'User'}],
     friend_request_pending : [{type : Schema.Types.ObjectId, ref : 'User'}],
     friend_request_sent : [{type : Schema.Types.ObjectId, ref : 'User'}],

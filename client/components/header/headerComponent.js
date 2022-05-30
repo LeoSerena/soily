@@ -10,7 +10,6 @@ export default function HeaderComponent(){
                 <title>Soil</title>
             </Head>
             <ToolBar/>
-            <RightHeader/>
         </div>
     )
 }
