@@ -1,8 +1,8 @@
 import Router from 'next/router'
 import { useState } from 'react'
 
-import ChatBox from '../../utils/chatBox'
-import { fetcher } from '../../../lib/request'
+import ChatBox from './chatBox'
+import { fetcher } from '../../lib/request'
 
 
 export default function Friend({ user, friend_username, friend_id, type, chat}){

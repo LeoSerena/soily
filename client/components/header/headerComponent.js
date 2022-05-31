@@ -1,11 +1,10 @@
 import Head from 'next/head'
 
 import ToolBar from './Toolbar';
-import RightHeader from './rightHeader'
 
 export default function HeaderComponent(){
     return (
-        <div>        
+        <div className='header'>        
             <Head>
                 <title>Soil</title>
             </Head>

@@ -7,21 +7,11 @@ const userSchema = new Schema({
         unique : true,
         validate : (u: string | string[]) => (u.length < 32 && !u.includes('@'))
     },
-    email: {
-        type: String,
-        required: true,
-        unique : true
-    },
-    password: {
-        type: String,
-        required: true,
-    },
+    email: { type: String, required: true, unique : true },
+    password: { type: String, required: true },
     chatIds : [{type : Schema.Types.ObjectId, ref : 'Chat', default : []}],
-    tokenVersion: {
-        type : Number,
-        required : true
-    },
-    image : { type: Schema.Types.ObjectId, ref : 'File'},
+    tokenVersion: { type : Number, required : true },
+    image : { type : String, default : 'uploads/profile_pictures/default.jpg'},
     friend_list : [{type : Schema.Types.ObjectId, ref : 'User'}],
     friend_request_pending : [{type : Schema.Types.ObjectId, ref : 'User'}],
     friend_request_sent : [{type : Schema.Types.ObjectId, ref : 'User'}],

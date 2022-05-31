@@ -6,7 +6,7 @@ import '../styles/general.css'
 import '../styles/Toolbar.css'
 
 import '../styles/recentDiscussions.css'
-import '../styles/chatbox.css'
+import '../styles/friends.css'
 import '../styles/myPageContainer.css'
 import '../styles/discussion.css'
 import '../styles/leftPanel.css'

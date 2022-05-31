@@ -87,4 +87,8 @@ user_route.post('/profilePicture', [authMiddleware, upload_profile_picture.singl
     }catch(err){ console.log(err) }
 })
 
+user_route.get('/profilePicture', authMiddleware, async (req, res) => {
+    
+})
+
 export default user_route

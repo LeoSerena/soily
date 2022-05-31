@@ -63,7 +63,7 @@ export default function NewDiscussionForm({ postId, userId }){
         }
     }
 
-    return <form>
+    return <form className='newDiscussionForm'>
             <label>title</label>
             <input onChange={handleChange} name='title' placeholder="title" value={title}></input>
             <label>tags</label>

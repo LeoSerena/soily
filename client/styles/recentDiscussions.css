@@ -1,6 +1,15 @@
 .recentDiscussions {
-    top: 100px;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    border: 1px solid black;
+    text-align: center;
+}
+
+.recentDiscussionList{
+    text-align: center;
+}
+
+.recentDiscussions p{
+    width : 10%
 }

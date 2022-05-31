@@ -24,9 +24,9 @@ export default function RecentDiscussions() {
 
     return (<section className="recentDiscussions">
         <h2>
-        Recent Discussions
+            Recent Discussions
         </h2>
-        <ul>
+        <ul className='recentDiscussionList'>
             {discussions.map(discussion => <DiscussionLink
                 key={discussion._id}
                 title={discussion.title} 

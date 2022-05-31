@@ -33,6 +33,8 @@ app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(bodyParser.json())
 
+app.use('/uploads', express.static('uploads'))
+
 app.get('/', (req, res) => { res.send('api is healthy') })
 
 app.use('/', friend_route)

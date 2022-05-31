@@ -1,23 +1,26 @@
 .main {
     height: 100%;
     width: 100%;
+    margin: 0;
 }
 
 body {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
     background-color: rgb(68, 68, 68);    
 }
 
-input[type=text]:focus{
+input[type=text]:focus, select{
     background-color: rgb(77, 77, 77);
 }
 
-button:hover{
+button:hover, input[type=submit]:hover{
     cursor: pointer;
 }
 
-button, input, textarea{
+button, input, textarea, select{
     background-color: rgb(49, 49, 49);
     border: 0;
     border-radius: 5px;
@@ -30,9 +33,20 @@ p{
 
 textarea{
     width: 100%;
+    resize: none;
 }
+
 
 * {
     color: white;
 }
 
+form {
+    border-radius: 3px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgb(61, 61, 61);
+    z-index: 1;
+}

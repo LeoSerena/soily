@@ -1,43 +1,103 @@
+.header{
+    width: 100%;
+}
+
 .toolBar {
-    padding: 12px 0px 8px 20px;
-    height: 50px;
-    margin-left: -0.6%;
-    margin-top: -0.6%;
+    display: flex;
+    left: 0;
+    top: 0;
+    border-bottom: 1px solid black;
+    padding: 0.5% 0% 0.8% 0%;
+    height: 30px;
     width: 100%;
     background-color: rgb(31, 30, 31);
     display: flex;
-    text-shadow: 2px 2px rgb(177, 177, 177);
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
 }
 
+/* ---------------- home link and new discussion ---------------- */
+
+.newAndHome{
+    flex: 10%;
+    height: 120%;
+    display: flex
+}
+
 .homeLink {
-    flex: 80%;
-    font-size: 50px;
+    width : 20%;
+    height: 100%;
+    font-size: 40px;
+    margin : 0% 1% 0% 1%;
     color: rgb(182, 183, 184);
     text-decoration: none;
+    text-align: center;
 }
 
-.newDiscussion {
-    flex : 90%
+.newDiscussion{
+    padding-top: 2px;
+    cursor: pointer;
+    height: 100%;
+    width: 20%;
+    height: 100%;
+    margin: 0;
+    text-align: center;
 }
+
+.newDiscussionForm{
+    top : 7%;
+    left: 1%;
+    width: 14%;
+    border: 1px solid black;
+}
+
+.newDiscussionForm label{
+    padding-top: 2%;
+    font-size: larger;
+    font-family: 'Roboto Medium', sans-serif;
+}
+
+.newDiscussionForm button{
+    width: 20%;
+    float: right;
+    margin-top: 2%;
+}
+
+/* ---------------- search bar ---------------- */
+
+.searchBar {
+    padding: 2px;
+    padding-top: 4px;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex: 12%;
+}
+
+.searchBar input{
+    width : 90%;
+    padding-top: 1%;
+    padding-left: 3%;
+}
+
+/* ---------------- right header below ---------------- */
 
 .right_header_container {
-    flex: 10%;
-    width: 20%;
+    flex : 30%;
 }
 
 .registerLogin{
-    height: 80%;
-    padding-bottom: 4%;
-    padding-right: 4%;
+    height: 120%;
+    width: 20%;
+    float: right;
+    padding-right: 0.5%;
 }
 
 #loginButton, #registerButton{
+    margin-right: 3%;
     border: 0;
     background-color: rgb(109, 109, 109);
-    width: 46%;
+    width: 48%;
     height: 100%;
-    margin: 2%;
     border-radius: 2px;
     font-size: 20px;
     text-decoration: none;
@@ -45,6 +105,14 @@
     outline: none;
     box-shadow: 0 4px rgb(153, 152, 152);
     font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+#loginButton{
+    width : 42%
+}
+
+#registerButton{
+    width : 52%
 }
 
 #loginButton:hover, #registerButton:hover{
@@ -75,56 +143,85 @@
 
 .loginForm input[type=text]{
     width : 100%;
-    margin: 1%;
 }
 
 .registerForm input[type=text]{
     width : 100%;
-    margin: 1%;
 }
 
 .loginForm button, input[type=submit]{
-    margin-left: 70%;
-    margin-top: 2%;
+    margin-top: 3px;
     width: 30%;
     height: 25px;
 }
 
 .registerForm button, input[type=submit]{
-    margin-left: 70%;
-    margin-top: 2%;
+    margin-top: 3px;
     width: 30%;
     height: 25px;
 }
 
-.right_header_container{
-    margin-right: 1%;
-    flex: 30%;
+.userComponent{
+    width: 30%;
+    height: 120%;
+    float: right;
+    display: flex;
+    padding: 0%;
+    margin: 0;
 }
 
-.userComponent{
-    display: flex ;
-    margin: 0;
-    padding: 0;
+.userInfo {
+    display: flex;
     height: 100%;
+    width: 100%;
+    padding: 0;
+    margin-left: 35px;
 }
 
 .username{
-    padding: 2%;
-    font-size: 30px;
-    width: 50%;
-    height: 100%;
+    font-size: 22px;
     margin: 0;
-    right: 0;
+    margin-top: 6px;
+    margin-right: 12px;
+    padding: 0;
+    cursor: pointer;
 }
 
-.friendsComponent {
+.profilePicture {
+    border-radius: 100% !important;
+    border: 1px solid black !important;
+}
+
+.userOptions {
+    margin-top: 7px;
+    align-items: center;
+}
+
+.optionImage {
+    border-radius: 100% !important;
+}
+
+.optionImage:hover {
+    background-color: rgb(17, 17, 17) !important;
+    cursor: pointer;
+}
+
+.options{
+    border-radius: 3px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
     position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 8%;
-    width: 100%;
+    background-color: rgb(61, 61, 61);
+    z-index: 1;
+    width: 5%;
+    border: 1px solid black;
+}
+
+.options button{
+    margin: 2px;
+}
+
+.options button:hover{
+    background-color: rgb(122, 122, 122);
 }
