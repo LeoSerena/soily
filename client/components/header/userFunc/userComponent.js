@@ -33,6 +33,7 @@ export default function UserComponent({ user, setUser }){
     async function handleToggleFriends(){
         if(toggleFriends){
             setToggleFriends(false)
+            setToggleOptions(!toggleOptions)
         }else{
             const [error, friends] = await fetcher(
                 `${process.env.NEXT_PUBLIC_SERVER_URL}/getFriends`,
@@ -44,6 +45,7 @@ export default function UserComponent({ user, setUser }){
             }else{
                 setFriends(friends)
                 setToggleFriends(true)
+                setToggleOptions(!toggleOptions)
             }
         }
     }
